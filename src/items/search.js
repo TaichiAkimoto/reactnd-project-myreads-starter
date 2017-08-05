@@ -15,7 +15,7 @@ class Search extends React.Component {
   }
   updateQuery = (query) => {
     if(query){
-      this.setState({ query: query })
+      this.setState({ query })
       BooksAPI.search(query.trim(), 20).then((result) => {
         if(result.error) {
           this.setState({ result: [], noquery: true })

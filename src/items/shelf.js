@@ -15,9 +15,7 @@ class Shelf extends React.Component {
 
   render() {
     const { books, changeShelf } = this.props
-    let currentlyReading
-    let wantToRead
-    let read
+    let currentlyReading, wantToRead, read
     if (books) {
       currentlyReading = books.filter((jenre) =>
         jenre.shelf === CURRENTLYREADING
