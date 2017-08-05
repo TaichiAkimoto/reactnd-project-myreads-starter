@@ -9,11 +9,12 @@ const READ = "read"
 
 class Shelf extends React.Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    changeShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books } = this.props
+    const { books, changeShelf } = this.props
     let currentlyReading
     let wantToRead
     let read
@@ -32,7 +33,6 @@ class Shelf extends React.Component {
       wantToRead=[]
       read = []
     }
-    console.log(currentlyReading);
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -50,7 +50,7 @@ class Shelf extends React.Component {
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                           <div className="book-shelf-changer">
-                            <select>
+                            <select value={ book.shelf } onChange={(e) => changeShelf(book, e.target.value)}>
                               <option value="none" disabled>Move to...</option>
                               <option value="currentlyReading">Currently Reading</option>
                               <option value="wantToRead">Want to Read</option>
@@ -75,9 +75,9 @@ class Shelf extends React.Component {
                   <li key={book.id}>>
                     <div className="book">
                       <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select value={ book.shelf } onChange={(e) => changeShelf(book, e.target.value)}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
@@ -102,9 +102,9 @@ class Shelf extends React.Component {
                   <li key={book.id}>>
                     <div className="book">
                       <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select value={ book.shelf } onChange={(e) => changeShelf(book, e.target.value)}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>

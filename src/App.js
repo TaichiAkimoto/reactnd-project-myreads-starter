@@ -6,15 +6,29 @@ import Shelf from './items/shelf'
 import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
-  state = {
-    books: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: []
+    };
+    this.changeShelfContent = this.changeShelfContent.bind(this);
   }
-
-  // fetch all books
-  componentDidMount() {
+  fetchAllShelf() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
+  }
+  changeShelfContent(content, shelf) {
+    // update value
+    BooksAPI.update(content, shelf).then((books) => {
+      if(books) {
+        this.fetchAllShelf()
+      }
+    })
+  }
+  // fetch all books
+  componentDidMount() {
+    this.fetchAllShelf()
   }
 
   render() {
@@ -22,11 +36,11 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
-          <Shelf books={books}/>
+          <Shelf books={books} changeShelf={ this.changeShelfContent }/>
           )}
         />
         <Route path='/search' render={() => (
-          <Search />
+          <Search changeShelf={ this.changeShelfContent }/>
           )}
         />
       </div>
