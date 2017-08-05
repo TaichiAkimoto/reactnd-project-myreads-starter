@@ -3,34 +3,16 @@ import '../App.css'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const CURRENTLYREADING = "currentlyReading"
-const WANTTOREAD = "wantToRead"
-const READ = "read"
-
 class Shelf extends React.Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
+    currentlyReading: PropTypes.array.isRequired,
+    wantToRead: PropTypes.array.isRequired,
+    read: PropTypes.array.isRequired,
     changeShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books, changeShelf } = this.props
-    let currentlyReading, wantToRead, read
-    if (books) {
-      currentlyReading = books.filter((jenre) =>
-        jenre.shelf === CURRENTLYREADING
-      )
-      wantToRead = books.filter((jenre) =>
-        jenre.shelf === WANTTOREAD
-      )
-      read = books.filter((jenre) =>
-        jenre.shelf === READ
-      )
-    } else {
-      currentlyReading=[]
-      wantToRead=[]
-      read = []
-    }
+    const { currentlyReading, wantToRead, read, changeShelf } = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">

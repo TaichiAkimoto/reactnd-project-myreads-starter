@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 
 class Search extends React.Component {
   static propTypes = {
+    currentlyReading: PropTypes.array.isRequired,
+    wantToRead: PropTypes.array.isRequired,
+    read: PropTypes.array.isRequired,
     changeShelf: PropTypes.func.isRequired
   }
   state = {
@@ -20,6 +23,11 @@ class Search extends React.Component {
         if(result.error) {
           this.setState({ result: [], noquery: true })
         } else {
+          //compare each book whether they exist or not
+          let queryResult = result.map((book) => {
+            console.log(book.shelf);
+            console.log(book.id);
+          })
           this.setState({ result: result, noquery: false })
         }
       })
