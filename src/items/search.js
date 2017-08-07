@@ -3,8 +3,8 @@ import '../App.css'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import PropTypes from 'prop-types'
-import BookGrid from './bookGrid'
 
+import BookGrid from './bookGrid'
 const CURRENTLYREADING = "currentlyReading"
 const WANTTOREAD = "wantToRead"
 const READ = "read"
@@ -73,7 +73,6 @@ class Search extends React.Component {
               value={query}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">
