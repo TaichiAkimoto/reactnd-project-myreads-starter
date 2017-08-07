@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import PropTypes from 'prop-types'
 
+const CURRENTLYREADING = "currentlyReading"
+const WANTTOREAD = "wantToRead"
+const READ = "read"
+const NONE = "none"
+
 class Search extends React.Component {
   static propTypes = {
     currentlyReading: PropTypes.array.isRequired,
@@ -23,10 +28,24 @@ class Search extends React.Component {
         if(result.error) {
           this.setState({ result: [], noquery: true })
         } else {
-          //compare each book whether they exist or not
-          let queryResult = result.map((book) => {
-            console.log(book.shelf);
-            console.log(book.id);
+          result.map((book) => {
+            let currentlyReadingMatch = this.props.currentlyReading.filter((item) => item.id === book.id)
+            if (currentlyReadingMatch.length !== 0) {
+              book.shelf = CURRENTLYREADING
+            }else{
+              let wantToReadMatch = this.props.wantToRead.filter((item) => item.id === book.id)
+              if(wantToReadMatch.length !== 0) {
+                book.shelf = WANTTOREAD
+              }else{
+                let readMatch = this.props.read.filter((item) => item.id === book.id)
+                if(readMatch.length !== 0) {
+                  book.shelf = READ
+                }else{
+                  book.shelf = NONE
+                }
+              }
+            }
+            return true
           })
           this.setState({ result: result, noquery: false })
         }
@@ -77,7 +96,8 @@ class Search extends React.Component {
                   </div>
                 </div>
                 <div className="book-title">{book.title}</div>
-                {book.authors && (<div className="book-authors">{book.authors[0]}</div>)}
+                {book.authors ? (<div className="book-authors">{book.authors[0]}</div>):
+                                (<div className="book-authors">Unknow Author</div>)}
               </div>
             </li>
           ))}
