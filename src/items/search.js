@@ -96,7 +96,7 @@ class Search extends React.Component {
                   </div>
                 </div>
                 <div className="book-title">{book.title}</div>
-                {book.authors ? (<div className="book-authors">{book.authors[0]}</div>):
+                {book.authors && book.authors[0] ? (<div className="book-authors">{book.authors[0]}</div>):
                                 (<div className="book-authors">Unknow Author</div>)}
               </div>
             </li>
