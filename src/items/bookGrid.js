@@ -8,7 +8,7 @@ class BookGrid extends React.Component {
     changeShelf: PropTypes.func.isRequired
   }
   render() {
-    const { books, changeShelf } = this.props
+    const { books, chan } = this.props
     return (
       <ol className="books-grid">
         {books.map((book) => (
@@ -27,8 +27,9 @@ class BookGrid extends React.Component {
                 </div>
               </div>
               <div className="book-title">{book.title}</div>
-              {book.authors && book.authors[0] ? (<div className="book-authors">{book.authors[0]}</div>):
-                              (<div className="book-authors">Unknow Author</div>)}
+              <div className="book-authors">
+                {book && book.authors && book.authors.join(", ") : 'Unknown Author'}
+              </div>
             </div>
           </li>
         ))}
